@@ -1,6 +1,6 @@
 # XJH-Net
-这个是我的本科毕设代码，数据集和预训练权重暂不开源。
-该工作暂定投稿于CVPR2024
+华中科技大学2024高级机器学习课程报告配套代码
+
   
 ## 环境
 
@@ -8,20 +8,24 @@
 ```
 conda create --name XJHNet python=3.8.18
 ```
-* 我自己用的torch版本
+* 参考的torch版本
 ```bash
 conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
+```
+* 其他相关库安装
+```
+pip install -r requirements.txt
 ```
 
 
 
 ## 运行前的准备
+
 预训练权重存放于`./weight`
 
-训练数据集包括事件体素的npy文件、低光帧图像和真实标签。
+训练数据集包括事件体素的npy文件、低光帧图像和真实标签，存放于`./dataset`。
 
-这两部分后续会陆续开源。
-
+预训练权重和提供测试的部分数据集可以在[这里](https://pan.baidu.com/s/17W8xrqw4a0v275uT5tOC0A?pwd=kd93 )下载：
 ## 训练
 运行`train.py`
 ```bash
@@ -43,9 +47,9 @@ python train.py --event_path dataset\xjh\voxel --frame_path dataset\xjh\frame --
 
 运行`predict.py	`
 ```bash
-python predict.py --event_path VOXEL_PATH --frame_path FRAME_PATH  --output_path OUTPUT_PATH --weight_path WEIGHT_PATH
+python predict.py --event_path VOXEL_PATH --frame_path FRAME_PATH  --output_path OUTPUT_PATH --weight_path WEIGHT_PATH --flag OUTPUT_FLAG
 ```
-其中`VOXEL_PATH`为体素的文件夹，`FRAME_PATH `为低光帧图像的文件夹，`OUTPUT_PATH `为输出文件夹，`WEIGHT_PATH `为预训练权重地址。
+其中`VOXEL_PATH`为体素的文件夹，`FRAME_PATH `为低光帧图像的文件夹，`OUTPUT_PATH `为输出文件夹，`WEIGHT_PATH `为预训练权重地址，`OUTPUT_FLAG`为想要输出的目标图像，从0~5分别表示“正常光、分解R、分解I、去噪R、图像热图、事件热图”，默认输出为正常光的结果。
 
 **示例**：
 ```bash
